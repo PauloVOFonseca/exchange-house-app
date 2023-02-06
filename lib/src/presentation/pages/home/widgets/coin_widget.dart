@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
 class CoinWidget extends StatefulWidget {
+  final String title;
   final String coin;
-  const CoinWidget({super.key, required this.coin});
+  const CoinWidget({super.key, required this.title, required this.coin});
 
   @override
   State<CoinWidget> createState() => _CoinWidgetState();
@@ -20,12 +21,17 @@ class _CoinWidgetState extends State<CoinWidget> {
           bottom: BorderSide(color: Colors.purple),
         ),
       ),
-      child: TextButton(
-          onPressed: () => print('kkk'),
-          child: Text(
-            widget.coin,
-            style: const TextStyle(color: Colors.black),
-          )),
+      child: Column(
+        children: [
+          Text(widget.title),
+          TextButton(
+              onPressed: () => print('kkkk'),
+              child: Text(
+                widget.coin,
+                style: const TextStyle(color: Colors.black),
+              )),
+        ],
+      ),
     );
   }
 }

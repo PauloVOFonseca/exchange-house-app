@@ -22,31 +22,37 @@ class _HomePageState extends State<HomePage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: const [
-                CoinWidget(coin: 'USD'),
+                CoinWidget(title: 'Troca de:', coin: 'USD'),
                 Icon(Icons.compare_arrows_rounded),
-                CoinWidget(coin: 'BRL'),
+                CoinWidget(title: 'Para:', coin: 'BRL'),
               ],
             ),
             const SizedBox(height: 8),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                const CoinWidget(coin: '19.99'),
+                const CoinWidget(title: 'Valor:', coin: '19.99'),
                 const Icon(Icons.arrow_forward),
-                Container(
-                  margin: const EdgeInsets.all(15),
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 2, vertical: 16),
-                  width: MediaQuery.of(context).size.width / 3.5,
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.purple),
-                  ),
-                  child: const Center(
-                    child: Text(
-                      "500.00",
-                      style: TextStyle(color: Colors.black),
+                Column(
+                  children: [
+                    const Text('Resultado da conversão:'),
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 2, vertical: 16),
+                      width: MediaQuery.of(context).size.width / 3.5,
+                      decoration: const BoxDecoration(
+                        border: Border(
+                          bottom: BorderSide(color: Colors.purple),
+                        ),
+                      ),
+                      child: const Center(
+                        child: Text(
+                          "500.00",
+                          style: TextStyle(color: Colors.black),
+                        ),
+                      ),
                     ),
-                  ),
+                  ],
                 ),
               ],
             ),
