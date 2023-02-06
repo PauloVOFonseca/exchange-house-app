@@ -9,6 +9,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final TextEditingController myController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,14 +33,37 @@ class _HomePageState extends State<HomePage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                const CoinWidget(title: 'Valor:', coin: '19.99'),
+                Column(
+                  children: [
+                    const Text('Valor:'),
+                    Container(
+                      width: MediaQuery.of(context).size.width / 3.5,
+                      margin: const EdgeInsets.symmetric(horizontal: 15),
+                      child: TextField(
+                        textAlign: TextAlign.center,
+                        keyboardType: TextInputType.number,
+                        controller: myController,
+                        decoration: const InputDecoration(
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.purple),
+                          ),
+                          border: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.purple),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
                 const Icon(Icons.arrow_forward),
                 Column(
                   children: [
                     const Text('Resultado da conversão:'),
                     Container(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 2, vertical: 16),
+                        horizontal: 2,
+                        vertical: 15,
+                      ),
                       width: MediaQuery.of(context).size.width / 3.5,
                       decoration: const BoxDecoration(
                         border: Border(
