@@ -4,8 +4,13 @@ import 'package:flutter/material.dart';
 class CoinSelectorWidget extends StatefulWidget {
   final String title;
   final String coin;
-  const CoinSelectorWidget(
-      {super.key, required this.title, required this.coin});
+  final Function(String) onPressed;
+  const CoinSelectorWidget({
+    super.key,
+    required this.title,
+    required this.coin,
+    required this.onPressed,
+  });
 
   @override
   State<CoinSelectorWidget> createState() => _CoinSelectorWidgetState();
@@ -34,7 +39,8 @@ class _CoinSelectorWidgetState extends State<CoinSelectorWidget> {
               ),
               builder: (BuildContext context) {
                 return CoinListWidget(
-                  onPressed: (coinSelected) => print('TESTEE $coinSelected'),
+                  currentCoinSelected: widget.coin,
+                  onPressed: (coinSelected) => widget.onPressed(coinSelected),
                 );
               },
             ),

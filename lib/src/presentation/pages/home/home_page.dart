@@ -31,7 +31,13 @@ class _HomePageState extends State<HomePage> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 CoinSelectorWidget(
-                    title: 'Troca de:', coin: pageController.coinBase),
+                  title: 'Troca de:',
+                  coin: pageController.coinBase,
+                  onPressed: (newCoinValue) {
+                    pageController.changeCoinBase(newCoinValue);
+                    setState(() {});
+                  },
+                ),
                 IconButton(
                   onPressed: () {
                     pageController.switchCoins();
@@ -40,7 +46,13 @@ class _HomePageState extends State<HomePage> {
                   icon: const Icon(Icons.compare_arrows_rounded),
                 ),
                 CoinSelectorWidget(
-                    title: 'Para:', coin: pageController.coinToConvert),
+                  title: 'Para:',
+                  coin: pageController.coinToConvert,
+                  onPressed: (newCoinValue) {
+                    pageController.changeCoinToConvert(newCoinValue);
+                    setState(() {});
+                  },
+                ),
               ],
             ),
             const SizedBox(height: 8),
