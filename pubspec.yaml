@@ -38,7 +38,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   dartz: ^0.10.1
   dio: ^4.0.6
-  injectable: ^2.1.0
+  get_it: ^7.2.0
   provider: ^6.0.5
 
 dev_dependencies:

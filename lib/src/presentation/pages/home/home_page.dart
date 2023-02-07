@@ -67,7 +67,8 @@ class _HomePageState extends State<HomePage> {
                 ),
                 const Icon(Icons.arrow_forward),
                 ExchangeResultWidget(
-                    result: pageController.convertedCoinValue ?? 0),
+                  result: pageController.convertedCoinValue ?? 0,
+                ),
               ],
             ),
             const SizedBox(height: 8),
