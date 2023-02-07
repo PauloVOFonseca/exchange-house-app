@@ -1,3 +1,4 @@
+import 'package:exchange_house_app/src/presentation/pages/home/home_controller.dart';
 import 'package:exchange_house_app/src/presentation/pages/home/widgets/base_conversion_rate_widget.dart';
 import 'package:exchange_house_app/src/presentation/pages/home/widgets/coin_selector_widget.dart';
 import 'package:exchange_house_app/src/presentation/pages/home/widgets/exchange_result_widget.dart';
@@ -14,6 +15,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final TextEditingController textController = TextEditingController();
+  final HomeController pageController = HomeController();
 
   @override
   Widget build(BuildContext context) {
@@ -27,10 +29,18 @@ class _HomePageState extends State<HomePage> {
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: const [
-                CoinSelectorWidget(title: 'Troca de:', coin: 'USD'),
-                Icon(Icons.compare_arrows_rounded),
-                CoinSelectorWidget(title: 'Para:', coin: 'BRL'),
+              children: [
+                CoinSelectorWidget(
+                    title: 'Troca de:', coin: pageController.coinBase),
+                IconButton(
+                  onPressed: () {
+                    pageController.switchCoins();
+                    setState(() {});
+                  },
+                  icon: const Icon(Icons.compare_arrows_rounded),
+                ),
+                CoinSelectorWidget(
+                    title: 'Para:', coin: pageController.coinToConvert),
               ],
             ),
             const SizedBox(height: 8),
