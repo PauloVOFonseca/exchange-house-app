@@ -2,7 +2,17 @@ import 'package:exchange_house_app/src/application/utils/coins.dart';
 import 'package:flutter/material.dart';
 
 class CoinListWidget extends StatelessWidget {
-  const CoinListWidget({super.key});
+  final String? currentCoinSelected;
+  final Function(String) onPressed;
+  const CoinListWidget({
+    super.key,
+    required this.onPressed,
+    this.currentCoinSelected,
+  });
+
+  bool isCoinSelected(int position) {
+    return COINS_MOCK.keys.elementAt(position) == currentCoinSelected;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,8 +34,26 @@ class CoinListWidget extends StatelessWidget {
                   itemCount: COINS_MOCK.length,
                   shrinkWrap: true,
                   itemBuilder: (BuildContext context, int count) {
-                    return Text(
-                        '${COINS_MOCK.keys.elementAt(count)} - ${COINS_MOCK.values.elementAt(count)}');
+                    return TextButton(
+                      onPressed: () {
+                        onPressed(COINS_MOCK.keys.elementAt(count));
+                        Navigator.pop(context);
+                      },
+                      style: TextButton.styleFrom(
+                        padding: EdgeInsets.zero,
+                        minimumSize: const Size(50, 30),
+                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                        alignment: Alignment.centerLeft,
+                      ),
+                      child: Text(
+                        '${COINS_MOCK.keys.elementAt(count)} - ${COINS_MOCK.values.elementAt(count)}',
+                        style: TextStyle(
+                          color: isCoinSelected(count)
+                              ? Colors.purple
+                              : Colors.black,
+                        ),
+                      ),
+                    );
                   },
                 ),
               ),

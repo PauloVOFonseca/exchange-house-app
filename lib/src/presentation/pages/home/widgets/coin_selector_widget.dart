@@ -1,4 +1,3 @@
-import 'package:exchange_house_app/src/application/utils/coins.dart';
 import 'package:exchange_house_app/src/presentation/pages/home/widgets/coin_list_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -34,7 +33,9 @@ class _CoinSelectorWidgetState extends State<CoinSelectorWidget> {
                 borderRadius: BorderRadius.circular(10.0),
               ),
               builder: (BuildContext context) {
-                return const CoinListWidget();
+                return CoinListWidget(
+                  onPressed: (coinSelected) => print('TESTEE $coinSelected'),
+                );
               },
             ),
             child: Text(
