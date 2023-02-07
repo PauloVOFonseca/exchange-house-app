@@ -4,13 +4,13 @@ class BaseConversionRateWidget extends StatelessWidget {
   final String coinBaseName;
   final double coinBaseValue;
   final String convertedCurrencyName;
-  final double convertedCurrencyValue;
+  final double? convertedCurrencyValue;
   const BaseConversionRateWidget({
     super.key,
     required this.coinBaseName,
     required this.coinBaseValue,
     required this.convertedCurrencyName,
-    required this.convertedCurrencyValue,
+    this.convertedCurrencyValue,
   });
 
   @override
@@ -26,10 +26,10 @@ class BaseConversionRateWidget extends StatelessWidget {
         children: [
           const Text('Taxa base de conversão:'),
           const SizedBox(height: 12),
-          Text('1 $coinBaseName = $convertedCurrencyValue $convertedCurrencyName'),
-          const SizedBox(height: 12),
           Text(
-              '1 $convertedCurrencyName = $coinBaseValue $coinBaseName'),
+              '1 $coinBaseName = $convertedCurrencyValue $convertedCurrencyName'),
+          const SizedBox(height: 12),
+          Text('1 $convertedCurrencyName = $coinBaseValue $coinBaseName'),
         ],
       ),
     );

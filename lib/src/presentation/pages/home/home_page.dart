@@ -66,7 +66,8 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
                 const Icon(Icons.arrow_forward),
-                const ExchangeResultWidget(result: 500),
+                ExchangeResultWidget(
+                    result: pageController.convertedCoinValue ?? 0),
               ],
             ),
             const SizedBox(height: 8),
@@ -76,11 +77,15 @@ class _HomePageState extends State<HomePage> {
               widthSize: 120,
             ),
             const SizedBox(height: 24),
-            const BaseConversionRateWidget(
-              coinBaseName: 'Real/BRL',
-              coinBaseValue: 0.2,
-              convertedCurrencyName: 'USD',
-              convertedCurrencyValue: 5,
+            Visibility(
+              visible: pageController.convertedCoinValue == null ? false : true,
+              child: BaseConversionRateWidget(
+                coinBaseName: pageController.coinBase,
+                coinBaseValue: pageController.coinBaseValue,
+                convertedCurrencyName: pageController.coinToConvert,
+                convertedCurrencyValue:
+                    pageController.convertedValueToBaseValue,
+              ),
             ),
           ],
         ),
