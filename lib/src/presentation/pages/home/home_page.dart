@@ -1,5 +1,5 @@
 import 'package:exchange_house_app/src/presentation/pages/home/widgets/base_conversion_rate_widget.dart';
-import 'package:exchange_house_app/src/presentation/pages/home/widgets/coin_widget.dart';
+import 'package:exchange_house_app/src/presentation/pages/home/widgets/coin_selector_widget.dart';
 import 'package:exchange_house_app/src/presentation/pages/home/widgets/exchange_result_widget.dart';
 import 'package:exchange_house_app/src/presentation/widgets/custom_button.dart';
 import 'package:exchange_house_app/src/presentation/widgets/custom_text_field.dart';
@@ -28,9 +28,9 @@ class _HomePageState extends State<HomePage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: const [
-                CoinWidget(title: 'Troca de:', coin: 'USD'),
+                CoinSelectorWidget(title: 'Troca de:', coin: 'USD'),
                 Icon(Icons.compare_arrows_rounded),
-                CoinWidget(title: 'Para:', coin: 'BRL'),
+                CoinSelectorWidget(title: 'Para:', coin: 'BRL'),
               ],
             ),
             const SizedBox(height: 8),
