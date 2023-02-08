@@ -23,6 +23,8 @@ In this app you can:
 - [ ] Save conversions
 - [ ] Show conversion history
 
+- [ ] Implement I18N
+
 - [ ] Create splash animation
 - [ ] Change app name
 - [ ] Change app icon
