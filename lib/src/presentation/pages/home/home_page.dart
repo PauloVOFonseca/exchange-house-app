@@ -73,8 +73,11 @@ class _HomePageState extends State<HomePage> {
             ),
             const SizedBox(height: 8),
             CustomButton(
-              onPressed: () =>
-                  pageController.makeCurrencyExchange(textController.text),
+              onPressed: () async {
+                FocusScope.of(context).unfocus();
+                await pageController.makeCurrencyExchange(textController.text);
+                setState(() {});
+              },
               text: 'Converter',
               widthSize: 120,
             ),
@@ -83,10 +86,10 @@ class _HomePageState extends State<HomePage> {
               visible: pageController.convertedCoinValue == null ? false : true,
               child: BaseConversionRateWidget(
                 coinBaseName: pageController.coinBase,
-                coinBaseValue: pageController.coinBaseValue,
+                coinBaseValue: pageController.coinBaseComparedToConverted,
                 convertedCurrencyName: pageController.coinToConvert,
                 convertedCurrencyValue:
-                    pageController.convertedValueToBaseValue,
+                    pageController.convertedCoinComparedToBase,
               ),
             ),
           ],

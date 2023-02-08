@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 
 class BaseConversionRateWidget extends StatelessWidget {
   final String coinBaseName;
-  final double coinBaseValue;
+  final double? coinBaseValue;
   final String convertedCurrencyName;
   final double? convertedCurrencyValue;
   const BaseConversionRateWidget({
     super.key,
     required this.coinBaseName,
-    required this.coinBaseValue,
+    this.coinBaseValue,
     required this.convertedCurrencyName,
     this.convertedCurrencyValue,
   });
@@ -26,10 +26,10 @@ class BaseConversionRateWidget extends StatelessWidget {
         children: [
           const Text('Taxa base de conversão:'),
           const SizedBox(height: 12),
-          Text(
-              '1 $coinBaseName = $convertedCurrencyValue $convertedCurrencyName'),
+          Text('1 $coinBaseName = $coinBaseValue $convertedCurrencyName'),
           const SizedBox(height: 12),
-          Text('1 $convertedCurrencyName = $coinBaseValue $coinBaseName'),
+          Text(
+              '1 $convertedCurrencyName = $convertedCurrencyValue $coinBaseName'),
         ],
       ),
     );
