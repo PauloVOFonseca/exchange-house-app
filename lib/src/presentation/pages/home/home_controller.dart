@@ -27,15 +27,20 @@ class HomeController {
     coinToConvert = temp;
   }
 
-  void makeCurrencyExchange(String amount) async {
+  Future<void> makeCurrencyExchange(String amount) async {
     if (amount.isNotEmpty) {
       final response = await _getConversionUseCase.call(
         baseCoin: coinBase,
         convertCoin: coinToConvert,
         amount: double.parse(amount),
       );
-      
-      response.fold((l) => null, (r) => print('rrrr $r'));
+
+      response.fold((error) {
+        print(error);
+      }, (conversionEntity) {
+        convertedCoinValue = conversionEntity.result;
+        print('$conversionEntity');
+      });
     }
   }
 }

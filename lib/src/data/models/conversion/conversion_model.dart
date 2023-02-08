@@ -5,7 +5,7 @@ part 'conversion_model.g.dart';
 
 @JsonSerializable(anyMap: true)
 class ConversionModel {
-  final String result;
+  final double result;
   final String date;
   final Map<String, dynamic> query;
   final Map<String, dynamic> info;

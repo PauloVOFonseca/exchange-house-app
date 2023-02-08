@@ -7,7 +7,7 @@ part of 'conversion_model.dart';
 // **************************************************************************
 
 ConversionModel _$ConversionModelFromJson(Map json) => ConversionModel(
-      result: json['result'] as String,
+      result: (json['result'] as num).toDouble(),
       date: json['date'] as String,
       query: Map<String, dynamic>.from(json['query'] as Map),
       info: Map<String, dynamic>.from(json['info'] as Map),

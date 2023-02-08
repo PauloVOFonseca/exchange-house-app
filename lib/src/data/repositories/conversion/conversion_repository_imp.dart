@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:exchange_house_app/src/application/services/locator.dart';
 import 'package:exchange_house_app/src/data/data_sources/conversion/conversion_datasource.dart';
+import 'package:exchange_house_app/src/domain/entities/conversion/conversion_entity.dart';
 import 'package:exchange_house_app/src/domain/repositories/conversion/conversion_repository.dart';
 
 class ConversionRepositoryImp implements ConversionRepository {
@@ -8,7 +9,7 @@ class ConversionRepositoryImp implements ConversionRepository {
       getIt<ConversionDatasource>();
 
   @override
-  Future<Either<String, dynamic>> getCoinConversion({
+  Future<Either<String, ConversionEntity>> getCoinConversion({
     required String baseCoin,
     required String convertCoin,
     required double amount,

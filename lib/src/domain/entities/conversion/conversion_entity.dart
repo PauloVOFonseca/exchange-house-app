@@ -1,5 +1,5 @@
 class ConversionEntity {
-  String result;
+  double result;
   String date;
   Map<String, dynamic> query;
   Map<String, dynamic> info;
