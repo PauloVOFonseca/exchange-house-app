@@ -22,7 +22,7 @@ class ExchangeResultWidget extends StatelessWidget {
           ),
           child: Center(
             child: Text(
-              result.toString(),
+              result.toStringAsFixed(2),
               style: const TextStyle(color: Colors.black),
             ),
           ),

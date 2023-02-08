@@ -82,8 +82,10 @@ class _HomePageState extends State<HomePage> {
               widthSize: 120,
             ),
             const SizedBox(height: 24),
+            if (pageController.pageState == HomePageState.loading)
+              const CircularProgressIndicator(),
             Visibility(
-              visible: pageController.convertedCoinValue == null ? false : true,
+              visible: pageController.pageState == HomePageState.loaded,
               child: BaseConversionRateWidget(
                 coinBaseName: pageController.coinBase,
                 coinBaseValue: pageController.coinBaseComparedToConverted,

@@ -2,6 +2,8 @@ import 'package:exchange_house_app/src/application/services/locator.dart';
 import 'package:exchange_house_app/src/domain/entities/conversion/conversion_entity.dart';
 import 'package:exchange_house_app/src/domain/use_cases/get_conversion/get_conversion_usecase.dart';
 
+enum HomePageState { initial, loading, loaded }
+
 class HomeController {
   String coinBase = 'BRL';
   String coinToConvert = 'USD';
@@ -13,6 +15,10 @@ class HomeController {
 
   final GetConversionUseCase _getConversionUseCase =
       getIt<GetConversionUseCase>();
+
+  HomePageState _pageState = HomePageState.initial;
+
+  HomePageState get pageState => _pageState;
 
   void changeCoinBase(String newCoinValue) {
     coinBase = newCoinValue;
@@ -29,6 +35,7 @@ class HomeController {
   }
 
   Future<void> makeCurrencyExchange(String amount) async {
+    _pageState = HomePageState.loading;
     if (amount.isNotEmpty) {
       final response = await _getConversionUseCase.call(
         baseCoin: coinBase,
@@ -41,6 +48,7 @@ class HomeController {
       }, (conversionEntity) {
         convertedCoinValue = conversionEntity.result;
         calculateValues(conversionEntity);
+        _pageState = HomePageState.loaded;
       });
     }
   }

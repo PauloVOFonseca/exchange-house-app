@@ -26,10 +26,11 @@ class BaseConversionRateWidget extends StatelessWidget {
         children: [
           const Text('Taxa base de conversão:'),
           const SizedBox(height: 12),
-          Text('1 $coinBaseName = $coinBaseValue $convertedCurrencyName'),
+          Text(
+              '1 $coinBaseName = ${coinBaseValue!.toStringAsFixed(2)} $convertedCurrencyName'),
           const SizedBox(height: 12),
           Text(
-              '1 $convertedCurrencyName = $convertedCurrencyValue $coinBaseName'),
+              '1 $convertedCurrencyName = ${convertedCurrencyValue!.toStringAsFixed(2)} $coinBaseName'),
         ],
       ),
     );
