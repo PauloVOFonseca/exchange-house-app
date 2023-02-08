@@ -1,16 +1,28 @@
-# exchange_house_app
+# Exchange House App
 
-A new Flutter project.
+# Introduction
+This is a currency conversion app
 
-## Getting Started
+In this app you can:
 
-This project is a starting point for a Flutter application.
+    - Convert an amount to another currency
+    - View your conversion history
+    - Use dark mode
 
-A few resources to get you started if this is your first Flutter project:
+# To Do
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- [x] Create base layout 
+- [x] Do convert requests
+- [ ] Create dark mode
+- [ ] Show errors on failed requests
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- [ ] Create unit tests
+- [ ] Create widget tests
+- [ ] Create integration tests
+
+- [ ] Save conversions
+- [ ] Show conversion history
+
+- [ ] Create splash animation
+- [ ] Change app name
+- [ ] Change app icon
