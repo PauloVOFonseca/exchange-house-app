@@ -16,8 +16,8 @@ class ConversionDatasourceImp implements ConversionDatasource {
   }) async {
     try {
       String replacedEndpoint = Endpoints.convert
-          .replaceFirst("{to}", baseCoin)
-          .replaceFirst("{from}", convertCoin)
+          .replaceFirst("{to}", convertCoin)
+          .replaceFirst("{from}", baseCoin)
           .replaceFirst("{amount}", amount.toString());
 
       final response = await dio.get(replacedEndpoint,

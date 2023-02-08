@@ -54,8 +54,8 @@ class HomeController {
   }
 
   void calculateValues(ConversionEntity conversionEntity) {
-    convertedCoinComparedToBase =
+    coinBaseComparedToConverted =
         conversionEntity.result / conversionEntity.query["amount"];
-    coinBaseComparedToConverted = 1 / convertedCoinComparedToBase!;
+    convertedCoinComparedToBase = 1 / coinBaseComparedToConverted!;
   }
 }
