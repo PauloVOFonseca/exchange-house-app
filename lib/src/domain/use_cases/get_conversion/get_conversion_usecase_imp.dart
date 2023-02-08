@@ -8,7 +8,15 @@ class GetConversionUseCaseImp implements GetConversionUseCase {
       getIt<ConversionRepository>();
 
   @override
-  Future<Either<String, dynamic>> call() async {
-    return await conversionRepository.getCoinConversion();
+  Future<Either<String, dynamic>> call({
+    required String baseCoin,
+    required String convertCoin,
+    required double amount,
+  }) async {
+    return await conversionRepository.getCoinConversion(
+      baseCoin: baseCoin,
+      convertCoin: convertCoin,
+      amount: amount,
+    );
   }
 }

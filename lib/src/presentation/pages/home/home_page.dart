@@ -73,7 +73,8 @@ class _HomePageState extends State<HomePage> {
             ),
             const SizedBox(height: 8),
             CustomButton(
-              onPressed: () => print('PRINTT'),
+              onPressed: () =>
+                  pageController.makeCurrencyExchange(textController.text),
               text: 'Converter',
               widthSize: 120,
             ),

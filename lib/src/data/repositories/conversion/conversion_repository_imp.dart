@@ -8,9 +8,17 @@ class ConversionRepositoryImp implements ConversionRepository {
       getIt<ConversionDatasource>();
 
   @override
-  Future<Either<String, dynamic>> getCoinConversion() async {
+  Future<Either<String, dynamic>> getCoinConversion({
+    required String baseCoin,
+    required String convertCoin,
+    required double amount,
+  }) async {
     try {
-      final result = await conversionDataSource.getConversion();
+      final result = await conversionDataSource.getConversion(
+        baseCoin: baseCoin,
+        convertCoin: convertCoin,
+        amount: amount,
+      );
       return Right(result);
     } on Exception catch (error) {
       return Left(
