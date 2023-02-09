@@ -4,6 +4,6 @@ import 'package:flutter/material.dart';
 
 void main() {
   setupGetIt();
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const AppWidget());
 }
-
