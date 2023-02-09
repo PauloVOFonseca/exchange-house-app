@@ -1,5 +1,6 @@
 import 'package:exchange_house_app/src/application/services/locator.dart';
 import 'package:exchange_house_app/src/domain/entities/conversion/conversion_entity.dart';
+import 'package:exchange_house_app/src/domain/entities/conversion/conversion_request_entity.dart';
 import 'package:exchange_house_app/src/domain/use_cases/get_conversion/get_conversion_usecase.dart';
 
 enum HomePageState { initial, loading, loaded }
@@ -38,9 +39,11 @@ class HomeController {
     _pageState = HomePageState.loading;
     if (amount.isNotEmpty) {
       final response = await _getConversionUseCase.call(
-        baseCoin: coinBase,
-        convertCoin: coinToConvert,
-        amount: double.parse(amount),
+        entity: ConversionRequestEntity(
+          baseCoin: coinBase,
+          convertCoin: coinToConvert,
+          amount: double.parse(amount),
+        ),
       );
 
       response.fold((error) {

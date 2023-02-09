@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:exchange_house_app/src/application/services/locator.dart';
 import 'package:exchange_house_app/src/domain/entities/conversion/conversion_entity.dart';
+import 'package:exchange_house_app/src/domain/entities/conversion/conversion_request_entity.dart';
 import 'package:exchange_house_app/src/domain/repositories/conversion/conversion_repository.dart';
 import 'package:exchange_house_app/src/domain/use_cases/get_conversion/get_conversion_usecase.dart';
 
@@ -10,14 +11,8 @@ class GetConversionUseCaseImp implements GetConversionUseCase {
 
   @override
   Future<Either<String, ConversionEntity>> call({
-    required String baseCoin,
-    required String convertCoin,
-    required double amount,
+    required ConversionRequestEntity entity,
   }) async {
-    return await conversionRepository.getCoinConversion(
-      baseCoin: baseCoin,
-      convertCoin: convertCoin,
-      amount: amount,
-    );
+    return await conversionRepository.getCoinConversion(entity: entity);
   }
 }
