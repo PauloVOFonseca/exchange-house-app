@@ -2,10 +2,11 @@ import 'package:exchange_house_app/src/application/services/locator.dart';
 import 'package:exchange_house_app/src/domain/entities/conversion/conversion_entity.dart';
 import 'package:exchange_house_app/src/domain/entities/conversion/conversion_request_entity.dart';
 import 'package:exchange_house_app/src/domain/use_cases/get_conversion/get_conversion_usecase.dart';
+import 'package:flutter/material.dart';
 
 enum HomePageState { initial, loading, loaded }
 
-class HomeController {
+class HomeController with ChangeNotifier {
   String coinBase = 'BRL';
   String coinToConvert = 'USD';
   double? convertedCoinValue;
@@ -23,20 +24,23 @@ class HomeController {
 
   void changeCoinBase(String newCoinValue) {
     coinBase = newCoinValue;
+    notifyListeners();
   }
 
   void changeCoinToConvert(String newCoinValue) {
     coinToConvert = newCoinValue;
+    notifyListeners();
   }
 
   void switchCoins() {
     final temp = coinBase;
-    coinBase = coinToConvert;
-    coinToConvert = temp;
+    changeCoinBase(coinToConvert);
+    changeCoinToConvert(temp);
   }
 
   Future<void> makeCurrencyExchange(String amount) async {
     _pageState = HomePageState.loading;
+    notifyListeners();
     if (amount.isNotEmpty) {
       final response = await _getConversionUseCase.call(
         entity: ConversionRequestEntity(
@@ -52,6 +56,7 @@ class HomeController {
         convertedCoinValue = conversionEntity.result;
         calculateValues(conversionEntity);
         _pageState = HomePageState.loaded;
+        notifyListeners();
       });
     }
   }

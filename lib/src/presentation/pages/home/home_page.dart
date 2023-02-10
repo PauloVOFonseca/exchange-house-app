@@ -5,6 +5,7 @@ import 'package:exchange_house_app/src/presentation/pages/home/widgets/exchange_
 import 'package:exchange_house_app/src/presentation/widgets/custom_button.dart';
 import 'package:exchange_house_app/src/presentation/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -32,25 +33,24 @@ class _HomePageState extends State<HomePage> {
               children: [
                 CoinSelectorWidget(
                   title: 'Troca de:',
-                  coin: pageController.coinBase,
+                  coin: context.watch<HomeController>().coinBase,
                   onPressed: (newCoinValue) {
-                    pageController.changeCoinBase(newCoinValue);
-                    setState(() {});
+                    context.read<HomeController>().changeCoinBase(newCoinValue);
                   },
                 ),
                 IconButton(
                   onPressed: () {
-                    pageController.switchCoins();
-                    setState(() {});
+                    context.read<HomeController>().switchCoins();
                   },
                   icon: const Icon(Icons.compare_arrows_rounded),
                 ),
                 CoinSelectorWidget(
                   title: 'Para:',
-                  coin: pageController.coinToConvert,
+                  coin: context.watch<HomeController>().coinToConvert,
                   onPressed: (newCoinValue) {
-                    pageController.changeCoinToConvert(newCoinValue);
-                    setState(() {});
+                    context
+                        .read<HomeController>()
+                        .changeCoinToConvert(newCoinValue);
                   },
                 ),
               ],
@@ -67,7 +67,8 @@ class _HomePageState extends State<HomePage> {
                 ),
                 const Icon(Icons.arrow_forward),
                 ExchangeResultWidget(
-                  result: pageController.convertedCoinValue ?? 0,
+                  result:
+                      context.watch<HomeController>().convertedCoinValue ?? 0,
                 ),
               ],
             ),
@@ -75,25 +76,28 @@ class _HomePageState extends State<HomePage> {
             CustomButton(
               onPressed: () async {
                 FocusScope.of(context).unfocus();
-                await pageController.makeCurrencyExchange(textController.text);
-                setState(() {});
+                await context
+                    .read<HomeController>()
+                    .makeCurrencyExchange(textController.text);
               },
               text: 'Converter',
               widthSize: 120,
             ),
             const SizedBox(height: 24),
-            if (pageController.pageState == HomePageState.loading)
+            if (context.watch<HomeController>().pageState ==
+                HomePageState.loading)
               const CircularProgressIndicator(),
-            Visibility(
-              visible: pageController.pageState == HomePageState.loaded,
-              child: BaseConversionRateWidget(
-                coinBaseName: pageController.coinBase,
-                coinBaseValue: pageController.coinBaseComparedToConverted,
-                convertedCurrencyName: pageController.coinToConvert,
+            if (context.watch<HomeController>().pageState ==
+                HomePageState.loaded)
+              BaseConversionRateWidget(
+                coinBaseName: context.watch<HomeController>().coinBase,
+                coinBaseValue:
+                    context.watch<HomeController>().coinBaseComparedToConverted,
+                convertedCurrencyName:
+                    context.watch<HomeController>().coinToConvert,
                 convertedCurrencyValue:
-                    pageController.convertedCoinComparedToBase,
+                    context.watch<HomeController>().convertedCoinComparedToBase,
               ),
-            ),
           ],
         ),
       ),
