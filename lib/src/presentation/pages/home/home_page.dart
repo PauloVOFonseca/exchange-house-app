@@ -17,11 +17,11 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final TextEditingController textController = TextEditingController();
-  final HomeController pageController = HomeController();
+  late HomeController pageController;
 
   @override
   Widget build(BuildContext context) {
-    print('Entrou aqui');
+    pageController = context.watch<HomeController>();
     return Scaffold(
       appBar: AppBar(
         title: const Text('Currency Converter'),
@@ -35,24 +35,22 @@ class _HomePageState extends State<HomePage> {
               children: [
                 CoinSelectorWidget(
                   title: 'Troca de:',
-                  coin: context.watch<HomeController>().coinBase,
+                  coin: pageController.coinBase,
                   onPressed: (newCoinValue) {
-                    context.read<HomeController>().changeCoinBase(newCoinValue);
+                    pageController.changeCoinBase(newCoinValue);
                   },
                 ),
                 IconButton(
                   onPressed: () {
-                    context.read<HomeController>().switchCoins();
+                    pageController.switchCoins();
                   },
                   icon: const Icon(Icons.compare_arrows_rounded),
                 ),
                 CoinSelectorWidget(
                   title: 'Para:',
-                  coin: context.watch<HomeController>().coinToConvert,
+                  coin: pageController.coinToConvert,
                   onPressed: (newCoinValue) {
-                    context
-                        .read<HomeController>()
-                        .changeCoinToConvert(newCoinValue);
+                    pageController.changeCoinToConvert(newCoinValue);
                   },
                 ),
               ],
@@ -69,8 +67,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 const Icon(Icons.arrow_forward),
                 ExchangeResultWidget(
-                  result:
-                      context.watch<HomeController>().convertedCoinValue ?? 0,
+                  result: pageController.convertedCoinValue ?? 0,
                 ),
               ],
             ),
@@ -78,30 +75,23 @@ class _HomePageState extends State<HomePage> {
             CustomButton(
               onPressed: () async {
                 FocusScope.of(context).unfocus();
-                await context
-                    .read<HomeController>()
-                    .makeCurrencyExchange(textController.text);
+                await pageController.makeCurrencyExchange(textController.text);
               },
               text: 'Converter',
               widthSize: 120,
             ),
             const SizedBox(height: 24),
-            if (context.watch<HomeController>().pageState ==
-                HomePageState.loading)
+            if (pageController.pageState == HomePageState.loading)
               const CircularProgressIndicator(),
-            if (context.watch<HomeController>().pageState ==
-                HomePageState.loaded)
+            if (pageController.pageState == HomePageState.loaded)
               BaseConversionRateWidget(
-                coinBaseName: context.watch<HomeController>().coinBase,
-                coinBaseValue:
-                    context.watch<HomeController>().coinBaseComparedToConverted,
-                convertedCurrencyName:
-                    context.watch<HomeController>().coinToConvert,
+                coinBaseName: pageController.coinBase,
+                coinBaseValue: pageController.coinBaseComparedToConverted,
+                convertedCurrencyName: pageController.coinToConvert,
                 convertedCurrencyValue:
-                    context.watch<HomeController>().convertedCoinComparedToBase,
+                    pageController.convertedCoinComparedToBase,
               ),
-            if (context.watch<HomeController>().pageState ==
-                HomePageState.error)
+            if (pageController.pageState == HomePageState.error)
               const ErrorMessageWidget(),
           ],
         ),
