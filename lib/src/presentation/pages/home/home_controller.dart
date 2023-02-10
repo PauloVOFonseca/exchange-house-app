@@ -4,7 +4,7 @@ import 'package:exchange_house_app/src/domain/entities/conversion/conversion_req
 import 'package:exchange_house_app/src/domain/use_cases/get_conversion/get_conversion_usecase.dart';
 import 'package:flutter/material.dart';
 
-enum HomePageState { initial, loading, loaded }
+enum HomePageState { initial, loading, loaded, error }
 
 class HomeController with ChangeNotifier {
   String coinBase = 'BRL';
@@ -51,13 +51,14 @@ class HomeController with ChangeNotifier {
       );
 
       response.fold((error) {
-        print(error);
+        _pageState = HomePageState.error;
       }, (conversionEntity) {
         convertedCoinValue = conversionEntity.result;
         calculateValues(conversionEntity);
         _pageState = HomePageState.loaded;
-        notifyListeners();
       });
+      
+      notifyListeners();
     }
   }
 
