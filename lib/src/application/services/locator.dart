@@ -1,3 +1,5 @@
+import 'package:exchange_house_app/src/data/clients/http/http_client.dart';
+import 'package:exchange_house_app/src/data/clients/http/http_client_imp.dart';
 import 'package:exchange_house_app/src/data/data_sources/conversion/conversion_datasource.dart';
 import 'package:exchange_house_app/src/data/data_sources/conversion/conversion_datasource_imp.dart';
 import 'package:exchange_house_app/src/data/repositories/conversion/conversion_repository_imp.dart';
@@ -15,4 +17,5 @@ void setupGetIt() {
       () => ConversionRepositoryImp());
   getIt.registerLazySingleton<GetConversionUseCase>(
       () => GetConversionUseCaseImp());
+  getIt.registerLazySingleton<HttpClient>(() => HttpClientImp());
 }
