@@ -11,6 +11,7 @@
 migrate_working_dir/
 
 /lib/src/application/constants/secret_key.dart
+/lib/src/application/services/database/tables.dart
 
 # IntelliJ related
 *.iml
