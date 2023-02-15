@@ -1,3 +1,4 @@
+import 'package:exchange_house_app/src/presentation/pages/historic/historic_page.dart';
 import 'package:exchange_house_app/src/presentation/pages/home/home_controller.dart';
 import 'package:exchange_house_app/src/presentation/pages/home/widgets/base_conversion_rate_widget.dart';
 import 'package:exchange_house_app/src/presentation/pages/home/widgets/coin_selector_widget.dart';
@@ -25,6 +26,17 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Currency Converter'),
+        actions: [
+          IconButton(
+            onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute<void>(
+                builder: (BuildContext context) => const HistoricPage(),
+              ),
+            ),
+            icon: const Icon(Icons.history_rounded),
+          ),
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24),
