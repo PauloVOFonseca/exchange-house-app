@@ -1,7 +1,9 @@
 import 'package:exchange_house_app/src/application/services/locator.dart';
 import 'package:exchange_house_app/src/domain/entities/conversion/conversion_entity.dart';
 import 'package:exchange_house_app/src/domain/entities/conversion/conversion_request_entity.dart';
+import 'package:exchange_house_app/src/domain/entities/conversion_history/conversion_history_entity.dart';
 import 'package:exchange_house_app/src/domain/use_cases/get_conversion/get_conversion_usecase.dart';
+import 'package:exchange_house_app/src/domain/use_cases/save_conversion/save_conversion_usecase.dart';
 import 'package:flutter/material.dart';
 
 enum HomePageState { initial, loading, loaded, error }
@@ -17,6 +19,9 @@ class HomeController with ChangeNotifier {
 
   final GetConversionUseCase _getConversionUseCase =
       getIt<GetConversionUseCase>();
+
+  final SaveConversionUsecase _saveConversionUseCase =
+      getIt<SaveConversionUsecase>();
 
   HomePageState _pageState = HomePageState.initial;
 
@@ -52,12 +57,15 @@ class HomeController with ChangeNotifier {
 
       response.fold((error) {
         _pageState = HomePageState.error;
-      }, (conversionEntity) {
+      }, (conversionEntity) async {
         convertedCoinValue = conversionEntity.result;
         calculateValues(conversionEntity);
+
         _pageState = HomePageState.loaded;
+
+        await saveConversionOnLocal(amount);
       });
-      
+
       notifyListeners();
     }
   }
@@ -66,5 +74,16 @@ class HomeController with ChangeNotifier {
     coinBaseComparedToConverted =
         conversionEntity.result / conversionEntity.query["amount"];
     convertedCoinComparedToBase = 1 / coinBaseComparedToConverted!;
+  }
+
+  Future<void> saveConversionOnLocal(String amount) async {
+    await _saveConversionUseCase.call(
+        entity: ConversionHistoryEntity(
+      conversionDate: DateTime.now().toString(),
+      baseCurrency: coinBase,
+      convertCurrency: coinToConvert,
+      amount: double.parse(amount),
+      result: convertedCoinValue!,
+    ));
   }
 }
