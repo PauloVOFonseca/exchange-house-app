@@ -19,12 +19,17 @@ import 'package:get_it/get_it.dart';
 final getIt = GetIt.instance;
 
 void setupGetIt() {
+  getIt.registerLazySingleton<HttpClient>(() => HttpClientImp());
+  getIt.registerLazySingleton<DBClient>(() => DBClientImp());
+
   getIt.registerLazySingleton<ConversionDatasource>(
-      () => ConversionDatasourceImp());
-  getIt.registerLazySingleton<ConversionRepository>(
-      () => ConversionRepositoryImp());
-  getIt.registerLazySingleton<GetConversionUseCase>(
-      () => GetConversionUseCaseImp());
+      () => ConversionDatasourceImp(httpClient: getIt<HttpClient>()));
+  getIt.registerLazySingleton<ConversionRepository>(() =>
+      ConversionRepositoryImp(
+          conversionDataSource: getIt<ConversionDatasource>()));
+  getIt.registerLazySingleton<GetConversionUseCase>(() =>
+      GetConversionUseCaseImp(
+          conversionRepository: getIt<ConversionRepository>()));
 
   getIt.registerLazySingleton<ConversionHistoryDatasource>(
       () => ConversionHistoryDatasourceImp());
@@ -32,7 +37,4 @@ void setupGetIt() {
       () => ConversionHistoryRepositoryImp());
   getIt.registerLazySingleton<SaveConversionUsecase>(
       () => SaveConversionUsecaseImp());
-
-  getIt.registerLazySingleton<HttpClient>(() => HttpClientImp());
-  getIt.registerLazySingleton<DBClient>(() => DBClientImp());
 }
