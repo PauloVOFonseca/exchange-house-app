@@ -32,9 +32,11 @@ void setupGetIt() {
           conversionRepository: getIt<ConversionRepository>()));
 
   getIt.registerLazySingleton<ConversionHistoryDatasource>(
-      () => ConversionHistoryDatasourceImp());
-  getIt.registerLazySingleton<ConversionHistoryRepository>(
-      () => ConversionHistoryRepositoryImp());
-  getIt.registerLazySingleton<SaveConversionUsecase>(
-      () => SaveConversionUsecaseImp());
+      () => ConversionHistoryDatasourceImp(dbClient: getIt<DBClient>()));
+  getIt.registerLazySingleton<ConversionHistoryRepository>(() =>
+      ConversionHistoryRepositoryImp(
+          dataSource: getIt<ConversionHistoryDatasource>()));
+  getIt.registerLazySingleton<SaveConversionUsecase>(() =>
+      SaveConversionUsecaseImp(
+          repository: getIt<ConversionHistoryRepository>()));
 }

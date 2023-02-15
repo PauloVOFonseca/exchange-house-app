@@ -1,11 +1,12 @@
 import 'package:exchange_house_app/src/application/constants/db_tables.dart';
-import 'package:exchange_house_app/src/application/services/locator.dart';
 import 'package:exchange_house_app/src/data/clients/db/db_client.dart';
 import 'package:exchange_house_app/src/data/data_sources/conversion_history/conversion_history_datasource.dart';
 import 'package:exchange_house_app/src/domain/entities/conversion_history/conversion_history_entity.dart';
 
 class ConversionHistoryDatasourceImp implements ConversionHistoryDatasource {
-  final DBClient dbClient = getIt<DBClient>();
+  final DBClient dbClient;
+
+  ConversionHistoryDatasourceImp({required this.dbClient});
 
   @override
   Future<bool> saveConversion({
