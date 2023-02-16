@@ -2,7 +2,7 @@ import 'package:exchange_house_app/src/application/utils/coins.dart';
 import 'package:flutter/material.dart';
 
 class HistoricCardWidget extends StatelessWidget {
-  final DateTime date;
+  final String date;
   final String baseCoin;
   final String convertedCoin;
   final double amount;
@@ -29,7 +29,7 @@ class HistoricCardWidget extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(date.toString()),
+                Text(date),
                 const Icon(Icons.attach_money, color: Colors.yellow),
               ],
             ),

@@ -31,34 +31,21 @@ class _HistoricPageState extends State<HistoricPage> {
             }
             if (snapshot.connectionState == ConnectionState.done &&
                 snapshot.data!.isNotEmpty) {
-              return Column(
-                children: [
-                  HistoricCardWidget(
-                    date: DateTime.now(),
-                    baseCoin: 'USD',
-                    convertedCoin: 'BRL',
-                    amount: 5.2,
-                    result: 25.05,
-                  ),
-                  const SizedBox(height: 10),
-                  HistoricCardWidget(
-                    date: DateTime.now(),
-                    baseCoin: 'BRL',
-                    convertedCoin: 'EUR',
-                    amount: 30.2,
-                    result: 6.17,
-                  ),
-                  const SizedBox(height: 10),
-                  HistoricCardWidget(
-                    date: DateTime.now(),
-                    baseCoin: 'BRL',
-                    convertedCoin: 'KRW',
-                    amount: 100000,
-                    result: 300000003,
-                  ),
-                ],
+              return Expanded(
+                child: ListView.builder(
+                  itemCount: snapshot.data!.length,
+                  itemBuilder: ((context, index) {
+                    return HistoricCardWidget(
+                      date: snapshot.data![index].conversionDate,
+                      baseCoin: snapshot.data![index].baseCurrency,
+                      convertedCoin: snapshot.data![index].convertCurrency,
+                      amount: snapshot.data![index].amount,
+                      result: snapshot.data![index].result,
+                    );
+                  }),
+                ),
               );
-            } 
+            }
             return Container();
           }),
         ),
