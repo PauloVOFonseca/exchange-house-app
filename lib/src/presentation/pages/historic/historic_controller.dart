@@ -15,6 +15,6 @@ class HistoricController {
 
     result.map((list) => allConversionList = list);
 
-    return allConversionList;
+    return allConversionList.reversed.toList();
   }
 }
