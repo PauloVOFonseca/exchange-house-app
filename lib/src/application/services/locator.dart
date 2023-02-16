@@ -10,6 +10,8 @@ import 'package:exchange_house_app/src/data/repositories/conversion/conversion_r
 import 'package:exchange_house_app/src/data/repositories/conversion_history/conversion_history_repository_imp.dart';
 import 'package:exchange_house_app/src/domain/repositories/conversion/conversion_repository.dart';
 import 'package:exchange_house_app/src/domain/repositories/conversion_history/conversion_history_repository.dart';
+import 'package:exchange_house_app/src/domain/use_cases/get_all_conversions/get_all_conversions_usecase.dart';
+import 'package:exchange_house_app/src/domain/use_cases/get_all_conversions/get_all_conversions_usecase_imp.dart';
 import 'package:exchange_house_app/src/domain/use_cases/get_conversion/get_conversion_usecase.dart';
 import 'package:exchange_house_app/src/domain/use_cases/get_conversion/get_conversion_usecase_imp.dart';
 import 'package:exchange_house_app/src/domain/use_cases/save_conversion/save_conversion_usecase.dart';
@@ -38,5 +40,8 @@ void setupGetIt() {
           dataSource: getIt<ConversionHistoryDatasource>()));
   getIt.registerLazySingleton<SaveConversionUsecase>(() =>
       SaveConversionUsecaseImp(
+          repository: getIt<ConversionHistoryRepository>()));
+  getIt.registerLazySingleton<GetAllConversionsUseCase>(() =>
+      GetAllConversionsUseCaseImp(
           repository: getIt<ConversionHistoryRepository>()));
 }

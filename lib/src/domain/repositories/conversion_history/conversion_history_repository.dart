@@ -5,4 +5,6 @@ abstract class ConversionHistoryRepository {
   Future<Either<String, bool>> saveConversion({
     required ConversionHistoryEntity entity,
   });
+
+  Future<Either<String, List<ConversionHistoryEntity>>> getAllConversions();
 }

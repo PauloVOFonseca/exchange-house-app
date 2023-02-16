@@ -18,9 +18,19 @@ class ConversionHistoryRepositoryImp implements ConversionHistoryRepository {
       );
       return Right(result);
     } on Exception catch (error) {
-      return Left(
-        error.toString(),
-      );
+      return Left(error.toString());
+    }
+  }
+
+  @override
+  Future<Either<String, List<ConversionHistoryEntity>>>
+      getAllConversions() async {
+    try {
+      final result = await dataSource.getHistory();
+
+      return Right(result);
+    } on Exception catch (error) {
+      return Left(error.toString());
     }
   }
 }
