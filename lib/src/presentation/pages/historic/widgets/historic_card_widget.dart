@@ -30,7 +30,15 @@ class HistoricCardWidget extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(formatDate(date)),
+                Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    color: Colors.grey[200],
+                  ),
+                  child: Text(formatDate(date)),
+                ),
                 const Icon(Icons.attach_money, color: Colors.yellow),
               ],
             ),
