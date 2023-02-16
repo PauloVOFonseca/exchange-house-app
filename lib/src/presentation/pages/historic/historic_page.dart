@@ -1,5 +1,6 @@
 import 'package:exchange_house_app/src/domain/entities/conversion_history/conversion_history_entity.dart';
 import 'package:exchange_house_app/src/presentation/pages/historic/historic_controller.dart';
+import 'package:exchange_house_app/src/presentation/pages/historic/widgets/empty_historic_widget.dart';
 import 'package:exchange_house_app/src/presentation/pages/historic/widgets/historic_card_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -45,7 +46,11 @@ class _HistoricPageState extends State<HistoricPage> {
                   }),
                 ),
               );
+            } else if (snapshot.connectionState == ConnectionState.done &&
+                snapshot.data!.isEmpty) {
+              return const EmptyHistoricWidget();
             }
+
             return Container();
           }),
         ),
