@@ -2,6 +2,7 @@ import 'package:exchange_house_app/src/domain/entities/conversion_history/conver
 import 'package:exchange_house_app/src/presentation/pages/historic/historic_controller.dart';
 import 'package:exchange_house_app/src/presentation/pages/historic/widgets/empty_historic_widget.dart';
 import 'package:exchange_house_app/src/presentation/pages/historic/widgets/historic_card_widget.dart';
+import 'package:exchange_house_app/src/presentation/widgets/error_message_widget.dart';
 import 'package:flutter/material.dart';
 
 class HistoricPage extends StatefulWidget {
@@ -50,8 +51,7 @@ class _HistoricPageState extends State<HistoricPage> {
                 snapshot.data!.isEmpty) {
               return const EmptyHistoricWidget();
             }
-
-            return Container();
+            return const ErrorMessageWidget();
           }),
         ),
       ),
