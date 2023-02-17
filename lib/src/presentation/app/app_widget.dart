@@ -1,4 +1,4 @@
-import 'package:exchange_house_app/src/presentation/pages/home/home_page.dart';
+import 'package:exchange_house_app/src/presentation/pages/splash/splash_page.dart';
 import 'package:flutter/material.dart';
 
 class AppWidget extends StatelessWidget {
@@ -11,7 +11,7 @@ class AppWidget extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.purple,
       ),
-      home: const HomePage(),
+      home: const SplashPage(),
     );
   }
 }
