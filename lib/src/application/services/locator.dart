@@ -21,27 +21,45 @@ import 'package:get_it/get_it.dart';
 final getIt = GetIt.instance;
 
 void setupGetIt() {
-  getIt.registerLazySingleton<HttpClient>(() => HttpClientImp());
-  getIt.registerLazySingleton<DBClient>(() => DBClientImp());
+  if (!getIt.isRegistered<HttpClient>()) {
+    getIt.registerLazySingleton<HttpClient>(() => HttpClientImp());
+  }
+  if (!getIt.isRegistered<DBClient>()) {
+    getIt.registerLazySingleton<DBClient>(() => DBClientImp());
+  }
 
-  getIt.registerLazySingleton<ConversionDatasource>(
-      () => ConversionDatasourceImp(httpClient: getIt<HttpClient>()));
-  getIt.registerLazySingleton<ConversionRepository>(() =>
-      ConversionRepositoryImp(
-          conversionDataSource: getIt<ConversionDatasource>()));
-  getIt.registerLazySingleton<GetConversionUseCase>(() =>
-      GetConversionUseCaseImp(
-          conversionRepository: getIt<ConversionRepository>()));
+  if (!getIt.isRegistered<ConversionDatasource>()) {
+    getIt.registerLazySingleton<ConversionDatasource>(
+        () => ConversionDatasourceImp(httpClient: getIt<HttpClient>()));
+  }
+  if (!getIt.isRegistered<ConversionRepository>()) {
+    getIt.registerLazySingleton<ConversionRepository>(() =>
+        ConversionRepositoryImp(
+            conversionDataSource: getIt<ConversionDatasource>()));
+  }
+  if (!getIt.isRegistered<GetConversionUseCase>()) {
+    getIt.registerLazySingleton<GetConversionUseCase>(() =>
+        GetConversionUseCaseImp(
+            conversionRepository: getIt<ConversionRepository>()));
+  }
 
-  getIt.registerLazySingleton<ConversionHistoryDatasource>(
-      () => ConversionHistoryDatasourceImp(dbClient: getIt<DBClient>()));
-  getIt.registerLazySingleton<ConversionHistoryRepository>(() =>
-      ConversionHistoryRepositoryImp(
-          dataSource: getIt<ConversionHistoryDatasource>()));
-  getIt.registerLazySingleton<SaveConversionUsecase>(() =>
-      SaveConversionUsecaseImp(
-          repository: getIt<ConversionHistoryRepository>()));
-  getIt.registerLazySingleton<GetAllConversionsUseCase>(() =>
-      GetAllConversionsUseCaseImp(
-          repository: getIt<ConversionHistoryRepository>()));
+  if (!getIt.isRegistered<ConversionHistoryDatasource>()) {
+    getIt.registerLazySingleton<ConversionHistoryDatasource>(
+        () => ConversionHistoryDatasourceImp(dbClient: getIt<DBClient>()));
+  }
+  if (!getIt.isRegistered<ConversionHistoryRepository>()) {
+    getIt.registerLazySingleton<ConversionHistoryRepository>(() =>
+        ConversionHistoryRepositoryImp(
+            dataSource: getIt<ConversionHistoryDatasource>()));
+  }
+  if (!getIt.isRegistered<SaveConversionUsecase>()) {
+    getIt.registerLazySingleton<SaveConversionUsecase>(() =>
+        SaveConversionUsecaseImp(
+            repository: getIt<ConversionHistoryRepository>()));
+  }
+  if (!getIt.isRegistered<GetAllConversionsUseCase>()) {
+    getIt.registerLazySingleton<GetAllConversionsUseCase>(() =>
+        GetAllConversionsUseCaseImp(
+            repository: getIt<ConversionHistoryRepository>()));
+  }
 }
