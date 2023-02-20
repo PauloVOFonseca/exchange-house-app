@@ -14,17 +14,17 @@ In this app you can:
 - [x] Create base layout 
 - [x] Do convert requests
 - [ ] Create dark mode
-- [ ] Show errors on failed requests
+- [X] Show errors on failed requests
 
-- [ ] Create unit tests
-- [ ] Create widget tests
-- [ ] Create integration tests
+- [X] Create unit tests
+- [X] Create widget tests
+- [X] Create integration tests
 
-- [ ] Save conversions
-- [ ] Show conversion history
+- [X] Save conversions
+- [X] Show conversion history
 
 - [ ] Implement I18N
 
-- [ ] Create splash animation
-- [ ] Change app name
-- [ ] Change app icon
+- [X] Create splash animation
+- [X] Change app name
+- [X] Change app icon
